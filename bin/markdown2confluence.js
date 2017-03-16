@@ -1,13 +1,27 @@
 #!/usr/bin/env node
-var md2conflu = require('../')
-var fs = require('fs')
-var path = require('path')
-var assert = require('assert')
+/* eslint no-process-exit:off */
+"use strict";
 
-var filename = process.argv[2]
-assert(filename, 'should have filename')
+var filename, fs, getStdin, markdown2confluence, path;
 
-fs.readFile(path.resolve(process.cwd(), filename), function(err, buf) {
-    assert(!err, 'read file ' + filename + ' error!')
-    console.log(md2conflu(buf + ''))
-})
+getStdin = require("get-stdin");
+markdown2confluence = require("../");
+fs = require("fs");
+path = require("path");
+filename = process.argv[2];
+
+if (filename && filename !== "-") {
+    filename = path.resolve(process.cwd(), filename);
+    fs.readFile(filename, (err, buf) => {
+        if (err) {
+            console.error(`Error reading file: ${filename}`);
+            process.exit(1);
+        } else {
+            console.log(markdown2confluence(buf.toString("utf8")));
+        }
+    });
+} else {
+    getStdin().then((str) => {
+        console.log(markdown2confluence(str));
+    });
+}

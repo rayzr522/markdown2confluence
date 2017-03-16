@@ -1,43 +1,43 @@
 {
-  "name": "markdown2confluence",
-  "version": "1.2.0",
-  "description": "convert markdown to confluence markup",
-  "main": "index.js",
-  "scripts": {
-    "test": "node test.js",
-    "build": "npm run build-html && npm run build-js",
-    "build-html": "jade -p node_modules/jade-gist/. < browser/index.jade > browser/index.html",
-    "build-js": "webpack browser/app.js --output-filename=browser/bundle.js",
-    "readme": "pretty-readme > readme.md"
-  },
-  "author": "ft",
-  "license": "ISC",
-  "dependencies": {
-    "marked": "^0.3.2",
-    "min-qs": "^1.3.0",
-    "min-util": "^2.3.0"
-  },
-  "bin": {
-    "markdown2confluence": "bin/markdown2confluence.js"
-  },
-  "devDependencies": {
-    "jade": "^1.11.0",
-    "jade-gist": "^1.0.3",
-    "raw-loader": "^0.5.1",
-    "webpack": "^1.14.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chunpu/markdown2confluence.git"
-  },
-  "keywords": [
-    "markdown",
-    "confluence",
-    "markup",
-    "convert"
-  ],
-  "bugs": {
-    "url": "https://github.com/chunpu/markdown2confluence/issues"
-  },
-  "homepage": "https://github.com/chunpu/markdown2confluence"
+    "name": "markdown2confluence-cws",
+    "version": "2.0.0",
+    "description": "Convert Markdown to Confluence Wiki Markup.",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "script/test",
+        "watch": "script/watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/connected-world-services/markdown2confluence-cws.git"
+    },
+    "keywords": [
+        "markdown",
+        "confluence",
+        "markup",
+        "convert"
+    ],
+    "author": "ft",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/connected-world-services/markdown2confluence-cws/issues"
+    },
+    "homepage": "https://github.com/connected-world-services/markdown2confluence-cws#readme",
+    "devDependencies": {
+        "codecov": "~2.0.2",
+        "eslint": "~3.17.1",
+        "istanbul": "~0.4.5",
+        "jasmine": "~2.5.3",
+        "nodemon": "~1.11.0"
+    },
+    "dependencies": {
+        "get-stdin": "~5.0.1",
+        "marked": "~0.3.6"
+    },
+    "engines": {
+        "node": ">= 4.0.0"
+    },
+    "bin": {
+        "markdown2confluence": "bin/markdown2confluence.js"
+    }
 }
