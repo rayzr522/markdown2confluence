@@ -90,6 +90,9 @@ cow()
         it("wraps things in braces", () => {
             expect(convert("text `code` text text `code`")).toEqual("text {{code}} text text {{code}}");
         });
+        it("changes unsafe text so Confluence understands it", () => {
+            expect(convert("`~/file` and `~/folder` and `{braces}`")).toEqual("{{&#126;&#47;file}} and {{&#126;&#47;folder}} and {{&#123;braces&#125;}}");
+        });
     });
     describe("del / strikethrough", () => {
         it("converts in GFM", () => {
