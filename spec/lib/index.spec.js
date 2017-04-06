@@ -93,6 +93,15 @@ cow()
         it("changes unsafe text so Confluence understands it", () => {
             expect(convert("`~/file` and `~/folder` and `{braces}`")).toEqual("{{&#126;&#47;file}} and {{&#126;&#47;folder}} and {{&#123;braces&#125;}}");
         });
+        it("preserves entities that are already HTML encoded", () => {
+            expect(convert("`Fish&Chips`")).toEqual("{{Fish&amp;Chips}}");
+            expect(convert("`> and <`")).toEqual("{{&gt; and &lt;}}");
+        });
+        it("is a bit strange here", () => {
+            // The markdown processing treats this as NOT HTML, so it is
+            // going to escape the & into &amp; first.
+            expect(convert("`it&#38;s`")).toEqual("{{it&amp;&#35;38&#59;s}}");
+        });
     });
     describe("del / strikethrough", () => {
         it("converts in GFM", () => {
