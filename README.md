@@ -25,7 +25,7 @@ Command-Line Use
 
 Install the tool.
 
-    npm install -g @connected-world-services/markdown2confluence
+    npm install -g markdown2confluence-cws
 
 Use it to convert a markdown file.
 
@@ -41,7 +41,7 @@ Library Use
 
 Use `npm` to install this package easily.
 
-    $ npm install --save @connected-world-services/markdown2confluence
+    $ npm install --save markdown2confluence-cws
 
 Alternately you may edit your `package.json` and add this to your `dependencies` object:
 
@@ -49,7 +49,7 @@ Alternately you may edit your `package.json` and add this to your `dependencies`
         ...
         "dependencies": {
             ...
-            "@connected-world-services/markdown2confluence": "*"
+            "markdown2confluence-cws": "*"
             ...
         }
         ...
