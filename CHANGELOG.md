@@ -2,6 +2,13 @@ CHANGELOG
 =========
 
 
+2.0.3 - 2017-06-23
+------------------
+
+* Documentation updated, fixed package name.
+* No functional changes.
+
+
 2.0.2 - 2017-04-06
 ------------------
 
