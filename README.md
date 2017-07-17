@@ -57,7 +57,7 @@ Alternately you may edit your `package.json` and add this to your `dependencies`
 
 Now you write some JavaScript to load Markdown content and convert.
 
-    markdown2confluence = require("markdown2confluence");
+    markdown2confluence = require("markdown2confluence-cws");
     markdown = fs.readFileSync("README.md");
     confluence = markdown2confluence(markdown);
     console.log(confluence); // Converted!

@@ -5,6 +5,14 @@ var convert;
 convert = require("../../");
 
 describe("markdown2confluence", () => {
+    describe("general", () => {
+        it("accepts a string", () => {
+            expect(convert("abc")).toEqual("abc");
+        });
+        it("accepts a Buffer", () => {
+            expect(convert(Buffer.from("abc", "utf8"))).toEqual("abc");
+        });
+    });
     describe("blockquote", () => {
         it("converts a single line quote correctly", () => {
             expect(convert(`Paragraph
