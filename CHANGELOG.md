@@ -2,6 +2,13 @@ CHANGELOG
 =========
 
 
+2.0.4 - 2017-07-17
+------------------
+
+* Fix error in documentation.
+* Accept a Buffer as input.
+
+
 2.0.3 - 2017-06-23
 ------------------
 
