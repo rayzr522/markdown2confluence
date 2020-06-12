@@ -1,56 +1,43 @@
-"use strict";
+import marked, { Renderer } from "marked"
+import querystring from "querystring"
 
-var defaultLanguageMap, marked, querystring;
+import { defaultLanguageMap, LanguageMap } from './language-map'
 
-marked = require("marked");
-querystring = require("querystring");
+export interface CodeBlockStyleOptions {
+    theme?: string
+    borderStyle?: string
+    linenumbers?: boolean
+    collapse?: boolean
+}
 
-// https://confluence.atlassian.com/doc/code-block-macro-139390.html
-defaultLanguageMap = {
-    "": "none",
-    actionscript3: "actionscript3",
-    bash: "bash",
-    csharp: "csharp",
-    coldfusion: "coldfusion",
-    cpp: "cpp",
-    css: "css",
-    delphi: "delphi",
-    diff: "diff",
-    erlang: "erlang",
-    groovy: "groovy",
-    html: "html",
-    java: "java",
-    javafx: "javafx",
-    javascript: "javascript",
-    js: "javascript",
-    perl: "perl",
-    php: "php",
-    powershell: "powershell",
-    python: "python",
-    ruby: "ruby",
-    scala: "scala",
-    shell: "bash",
-    sql: "sql",
-    vb: "vb",
-    xml: "xml"
-};
+export type Rewriter = (input: string) => string
 
+export interface RenderOptions {
+    marked: marked.MarkedOptions
+    codeLanguageMap: LanguageMap
+    codeStyling: CodeBlockStyleOptions
+    codeCollapseAt: number
+    linkRewrite: Rewriter
+    imageRewrite: Rewriter
+}
 
 /**
  * This class is how the marked library translsates markdown into something
  * else.
  */
-class ConfluenceRenderer {
+export class ConfluenceRenderer extends Renderer {
+    renderOptions: RenderOptions
+
     /**
      * Creates a new instance. The `options` parameter control a few
      * tweaks that can be applied by the user in order to render better
      * markup.
      *
-     * @param {Object} options
+     * @param {RenderOptions} options
      */
-    constructor(options) {
-        // Must not save it as `this.options` because marked overwrites
-        // that property.
+    constructor(options: RenderOptions) {
+        super()
+
         this.renderOptions = options;
     }
 
@@ -69,7 +56,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    blockquote(text) {
+    blockquote(text: string): string {
         return `{quote}\n${text.trim()}\n{quote}\n\n`;
     }
 
@@ -81,7 +68,7 @@ class ConfluenceRenderer {
      *
      * @return {string}
      */
-    br() {
+    br(): string {
         return "\n";
     }
 
@@ -103,11 +90,10 @@ class ConfluenceRenderer {
      * @param {string} lang
      * @return {string}
      */
-    code(text, lang) {
-        var stylingOptions;
-
+    code(text: string, lang: string): string {
         // Simple clone of the options.
-        stylingOptions = JSON.parse(JSON.stringify(this.renderOptions.codeStyling));
+        const stylingOptions = JSON.parse(JSON.stringify(this.renderOptions.codeStyling));
+
         lang = lang || "";
         lang = lang.toLowerCase();
         lang = this.renderOptions.codeLanguageMap[lang] || this.renderOptions.codeLanguageMap[""];
@@ -122,13 +108,13 @@ class ConfluenceRenderer {
         }
 
         // Convert to a string
-        stylingOptions = querystring.stringify(stylingOptions, "|");
+        let stylingString = querystring.stringify(stylingOptions, "|");
 
-        if (stylingOptions) {
-            stylingOptions = `:${stylingOptions}`;
+        if (stylingString) {
+            stylingString = `:${stylingString}`;
         }
 
-        return `{code${stylingOptions}}\n${text}\n{code}\n\n`;
+        return `{code${stylingString}}\n${text}\n{code}\n\n`;
     }
 
 
@@ -149,7 +135,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    codespan(text) {
+    codespan(text: string): string {
         return `{{${text.replace(/[{}]/g, "\\$&")}}}`;
     }
 
@@ -166,7 +152,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    del(text) {
+    del(text: string): string {
         return `-${text}-`;
     }
 
@@ -183,7 +169,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    em(text) {
+    em(text: string): string {
         return `_${text}_`;
     }
 
@@ -210,7 +196,7 @@ class ConfluenceRenderer {
      * @param {number} level
      * @return {string}
      */
-    heading(text, level) {
+    heading(text: string, level: number): string {
         return `h${level}. ${text}\n\n`;
     }
 
@@ -226,7 +212,7 @@ class ConfluenceRenderer {
      *
      * @return {string}
      */
-    hr() {
+    hr(): string {
         return "----\n\n";
     }
 
@@ -243,7 +229,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    html(text) {
+    html(text: string): string {
         return text;
     }
 
@@ -262,7 +248,7 @@ class ConfluenceRenderer {
      * @param {string} href
      * @return {string}
      */
-    image(href) {
+    image(href: string): string {
         href = this.renderOptions.imageRewrite(href);
 
         return `!${href}!`;
@@ -285,7 +271,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    link(href, title, text) {
+    link(href: string, title: string, text: string): string {
         // Sadly, one must choose if the link's title should be displayed
         // or the linked text should be displayed. We picked the linked text.
         text = text || title;
@@ -320,7 +306,7 @@ class ConfluenceRenderer {
      * @param {boolean} ordered
      * @return {string}
      */
-    list(text, ordered) {
+    list(text: string, ordered: boolean): string {
         text = text.trim();
 
         if (ordered) {
@@ -338,7 +324,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    listitem(text) {
+    listitem(text: string): string {
         // If a list item has a nested list, it will have a "\r" in the
         // text. Turn that "\r" into "\n" but trim out other whitespace
         // from the list.
@@ -357,7 +343,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    paragraph(text) {
+    paragraph(text: string): string {
         return `${text}\n\n`;
     }
 
@@ -374,7 +360,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    strong(text) {
+    strong(text: string): string {
         return `*${text}*`;
     }
 
@@ -386,7 +372,7 @@ class ConfluenceRenderer {
      * @param {string} body
      * @return {string}
      */
-    table(header, body) {
+    table(header: string, body: string): string {
         return `${header}${body}\n`;
     }
 
@@ -399,8 +385,8 @@ class ConfluenceRenderer {
      * @param {Object} flags
      * @return {string}
      */
-    tablecell(text, flags) {
-        var boundary;
+    tablecell(text: string, flags: Record<string, any>): string {
+        let boundary;
 
         if (flags.header) {
             boundary = "||";
@@ -420,8 +406,8 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    tablerow(text) {
-        var boundary;
+    tablerow(text: string): string {
+        let boundary;
 
         boundary = text.match(/^\|*/);
 
@@ -441,7 +427,7 @@ class ConfluenceRenderer {
      * @param {string} text
      * @return {string}
      */
-    text(text) {
+    text(text: string): string {
         return text;
     }
 }
@@ -453,44 +439,37 @@ class ConfluenceRenderer {
  * @param {string} href
  * @return {string}
  */
-function defaultHrefRewrite(href) {
+function defaultHrefRewrite(href: string): string {
     return href;
 }
 
-module.exports = (markdown, options) => {
-    var result;
-
-    // Set defaults.
-    options = options || {};
-    options.marked = options.marked || {};
-    options.codeLanguageMap = options.codeLanguageMap || defaultLanguageMap;
-    options.codeStyling = options.codeStyling || {
-        theme: "RDark",
-        linenumbers: true
-    };
-    options.codeCollapseAt = options.codeCollapseAt || 20;
-    options.linkRewrite = options.linkRewrite || defaultHrefRewrite;
-    options.imageRewrite = options.imageRewrite || defaultHrefRewrite;
+export default function convert(markdown: Buffer | string, partialOptions: Partial<RenderOptions> = {}): string {
+    const options: RenderOptions = {
+        marked: {},
+        codeLanguageMap: defaultLanguageMap,
+        codeStyling: {
+            theme: "RDark",
+            linenumbers: true
+        },
+        codeCollapseAt: 20,
+        linkRewrite: defaultHrefRewrite,
+        imageRewrite: defaultHrefRewrite,
+        ...partialOptions
+    }
 
     // Always override this one property.
     options.marked.renderer = new ConfluenceRenderer(options);
 
     // Convert Buffers to strings.
-    markdown = markdown.toString();
+    const markdownString = markdown.toString()
+        // Replace "\r\n" and "\r" with "\n".
+        .replace(/\r\n?/g, "\n")
 
-    // Replace "\r\n" and "\r" with "\n".
-    markdown = markdown.replace(/\r\n?/g, "\n");
-
-    // Convert.
-    result = marked(markdown, options.marked).trim();
-
-    // Fix the \r placeholder for list beginnings. See list() for more info.
-    result = result.replace(/\r/g, "");
-
-    // Remove trailing whitespace.
-    result = result.trim();
-
-    return result;
-};
+    return marked(markdownString, options.marked).trim()
+        // Fix the \r placeholder for list beginnings. See list() for more info.
+        .replace(/\r/g, "")
+        // Remove trailing whitespace.
+        .trim()
+}
 
 module.exports.defaultLanguageMap = defaultLanguageMap;
