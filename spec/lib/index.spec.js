@@ -98,12 +98,15 @@ cow()
         it("wraps things in braces", () => {
             expect(convert("text `code` text text `code`")).toEqual("text {{code}} text text {{code}}");
         });
-        it("leaves unsafe text intact", () => {
-            expect(convert("`~/file` and `~/folder` and `{braces}`")).toEqual("{{~/file}} and {{~/folder}} and {{{braces}}}");
+        it("leaves unsafe HTML entities intact", () => {
+            expect(convert("`~/file` and `~/folder` and `{braces}`")).toEqual("{{~/file}} and {{~/folder}} and {{\\{braces\\}}}");
         });
         it("preserves entities that are already HTML encoded", () => {
             expect(convert("`Fish&Chips`")).toEqual("{{Fish&amp;Chips}}");
             expect(convert("`> and <`")).toEqual("{{&gt; and &lt;}}");
+        });
+        it("prevents pre-emptive closing braces", () => {
+            expect(convert("`code}} breaks {{here`")).toEqual("{{code\\}\\} breaks \\{\\{here}}")
         });
         // it("is a bit strange here", () => {
         //     // The markdown processing treats this as NOT HTML, so it is
