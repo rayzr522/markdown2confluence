@@ -1,5 +1,6 @@
 Copyright 2014-2016 chunpu <527653908@qq.com>
 Copyright 2017 Connected World Services
+Copyright 2020 Peter Blood <rayzr522@gmail.com>
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 

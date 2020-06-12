@@ -3,6 +3,22 @@
     "version": "2.0.5",
     "description": "Convert Markdown to Confluence Wiki Markup.",
     "main": "lib/index.js",
+    "author": "Rayzr522 <rayzr522@gmail.com>",
+    "license": "ISC",
+    "keywords": [
+        "markdown",
+        "confluence",
+        "markup",
+        "convert"
+    ],
+    "homepage": "https://github.com/Rayzr522/markdown2confluence#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Rayzr522/markdown2confluence.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Rayzr522/markdown2confluence/issues"
+    },
     "publishConfig": {
         "access": "public"
     },
@@ -10,22 +26,6 @@
         "test": "script/test",
         "watch": "script/watch"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Rayzr522/markdown2confluence.git"
-    },
-    "keywords": [
-        "markdown",
-        "confluence",
-        "markup",
-        "convert"
-    ],
-    "author": "Rayzr522 <rayzr522@gmail.com>",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/connected-world-services/markdown2confluence-cws/issues"
-    },
-    "homepage": "https://github.com/connected-world-services/markdown2confluence-cws#readme",
     "devDependencies": {
         "@types/marked": "^0.7.4",
         "@types/node": "^14.0.13",
@@ -40,8 +40,5 @@
     },
     "dependencies": {
         "marked": "^1.1.0"
-    },
-    "engines": {
-        "node": ">= 4.0.0"
     }
 }
