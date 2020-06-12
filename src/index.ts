@@ -21,6 +21,11 @@ export interface RenderOptions {
     imageRewrite: Rewriter
 }
 
+export interface TableFlags {
+    header: boolean;
+    align: 'center' | 'left' | 'right' | null;
+}
+
 /**
  * This class is how the marked library translsates markdown into something
  * else.
@@ -382,17 +387,11 @@ export class ConfluenceRenderer extends Renderer {
      * with two bars instead of one.
      *
      * @param {string} text
-     * @param {Object} flags
+     * @param {TableFlags} flags
      * @return {string}
      */
-    tablecell(text: string, flags: Record<string, any>): string {
-        let boundary
-
-        if (flags.header) {
-            boundary = '||'
-        } else {
-            boundary = '|'
-        }
+    tablecell(text: string, flags: TableFlags): string {
+        const boundary = flags.header ? '||' : '|'
 
         return `${boundary}${text}`
     }
@@ -407,15 +406,8 @@ export class ConfluenceRenderer extends Renderer {
      * @return {string}
      */
     tablerow(text: string): string {
-        let boundary
-
-        boundary = text.match(/^\|*/)
-
-        if (boundary) {
-            boundary = boundary[0]
-        } else {
-            boundary = '|'
-        }
+        const matches = text.match(/^\|*/)
+        const boundary = matches ? matches[0] : '|'
 
         return `${text}${boundary}\n`
     }
