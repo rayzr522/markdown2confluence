@@ -443,7 +443,7 @@ function defaultHrefRewrite(href: string): string {
     return href
 }
 
-export default function convert(markdown: Buffer | string, partialOptions: Partial<RenderOptions> = {}): string {
+export function convert(markdown: Buffer | string, partialOptions: Partial<RenderOptions> = {}): string {
     const options: RenderOptions = {
         marked: {},
         codeLanguageMap: defaultLanguageMap,
@@ -472,4 +472,6 @@ export default function convert(markdown: Buffer | string, partialOptions: Parti
         .trim()
 }
 
-module.exports.defaultLanguageMap = defaultLanguageMap
+export { defaultLanguageMap }
+
+export default convert
