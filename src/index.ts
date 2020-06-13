@@ -449,15 +449,14 @@ export function convert(markdown: Buffer | string, partialOptions: Partial<Rende
         ...partialOptions
     }
 
-    // Always override this one property.
-    options.marked.renderer = new ConfluenceRenderer(options)
+    const renderer = new ConfluenceRenderer(options)
 
     // Convert Buffers to strings.
     const markdownString = markdown.toString()
         // Replace "\r\n" and "\r" with "\n".
         .replace(/\r\n?/g, '\n')
 
-    return marked(markdownString, options.marked).trim()
+    return marked(markdownString, {...options.marked, renderer}).trim()
         // Fix the \r placeholder for list beginnings. See list() for more info.
         .replace(/\r/g, '')
         // Remove trailing whitespace.
