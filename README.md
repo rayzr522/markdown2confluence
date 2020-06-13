@@ -1,11 +1,17 @@
-# Markdown2Confluence
+<h1 align="center">Markdown2Confluence</h1>
+<p align="center">
+    <a href="https://npmjs.org/package/@rayzr/minecraft2confluence">
+        <img alt="npm version" src="https://img.shields.io/npm/v/@rayzr/markdown2confluence.svg"/>
+    </a>
+    <a href="https://david-dm.org/Rayzr522/markdown2confluence">
+        <img alt="dependencies" src="https://img.shields.io/david/Rayzr522/markdown2confluence.svg"/>
+    </a>
+    <a href="https://david-dm.org/Rayzr522/markdown2confluence#info=devDependencies">
+        <img alt="dev dependencies" src="https://img.shields.io/david/dev/Rayzr522/markdown2confluence.svg"/>
+    </a>
+</p>
 
-Convert [Markdown] to [Confluence Wiki Markup]. This is an updated version of [markdown2confluence-cws](https://github.com/connected-world-services/markdown2confluence-cws), which is a continuation of the original [markdown2confluence](https://github.com/chunpu/markdown2confluence) project.
-
-[![npm version][npm-badge]][npm-link]
-[![Dependencies][dependencies-badge]][dependencies-link]
-[![Dev Dependencies][devdependencies-badge]][devdependencies-link]
-
+> Convert [Markdown] to [Confluence Wiki Markup]. This is an updated version of [markdown2confluence-cws](https://github.com/connected-world-services/markdown2confluence-cws), which is a continuation of the original [markdown2confluence](https://github.com/chunpu/markdown2confluence) project.
 
 ## Overview
 
@@ -120,10 +126,4 @@ This software is licensed under an [ISC license][LICENSE].
 [Markdown]: http://daringfireball.net/projects/markdown/syntax
 [Confluence Wiki Markup]: https://confluence.atlassian.com/display/CONF42/Confluence+Wiki+Markup
 [GitHub Flavored Markdown]: https://guides.github.com/features/mastering-markdown/
-[dependencies-badge]: https://img.shields.io/david/Rayzr522/markdown2confluence.svg
-[dependencies-link]: https://david-dm.org/Rayzr522/markdown2confluence
-[devdependencies-badge]: https://img.shields.io/david/dev/Rayzr522/markdown2confluence.svg
-[devdependencies-link]: https://david-dm.org/Rayzr522/markdown2confluence#info=devDependencies
 [LICENSE]: LICENSE.md
-[npm-badge]: https://img.shields.io/npm/v/@rayzr/markdown2confluence.svg
-[npm-link]: https://npmjs.org/package/@rayzr/minecraft2confluence
