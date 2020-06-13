@@ -1,15 +1,8 @@
-<h1 align="center">:tada: Markdown2Confluence :tada:</h1>
-<p align="center">
-    <a href="https://npmjs.org/package/@rayzr/minecraft2confluence">
-        <img alt="npm version" src="https://img.shields.io/npm/v/@rayzr/markdown2confluence.svg"/>
-    </a>
-    <a href="https://david-dm.org/Rayzr522/markdown2confluence">
-        <img alt="dependencies" src="https://img.shields.io/david/Rayzr522/markdown2confluence.svg"/>
-    </a>
-    <a href="https://david-dm.org/Rayzr522/markdown2confluence#info=devDependencies">
-        <img alt="dev dependencies" src="https://img.shields.io/david/dev/Rayzr522/markdown2confluence.svg"/>
-    </a>
-</p>
+# Markdown2Confluence
+
+[![npm version](https://img.shields.io/npm/v/@rayzr/markdown2confluence.svg)](https://npmjs.org/package/@rayzr/minecraft2confluence)
+[![dependencies](https://img.shields.io/david/Rayzr522/markdown2confluence.svg)](https://david-dm.org/Rayzr522/markdown2confluence)
+[![dev dependencies](https://img.shields.io/david/dev/Rayzr522/markdown2confluence.svg)](https://david-dm.org/Rayzr522/markdown2confluence#info=devDependencies)
 
 > Convert [Markdown] to [Confluence Wiki Markup]. This is an updated version of [markdown2confluence-cws](https://github.com/connected-world-services/markdown2confluence-cws), which is a continuation of the original [markdown2confluence](https://github.com/chunpu/markdown2confluence) project.
 
