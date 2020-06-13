@@ -1,6 +1,6 @@
 # Markdown2Confluence
 
-[![npm version](https://img.shields.io/npm/v/@rayzr/markdown2confluence.svg)](https://npmjs.org/package/@rayzr/minecraft2confluence)
+[![npm version](https://img.shields.io/npm/v/@rayzr/markdown2confluence.svg)](https://npmjs.org/package/@rayzr/markdown2confluence)
 [![dependencies](https://img.shields.io/david/Rayzr522/markdown2confluence.svg)](https://david-dm.org/Rayzr522/markdown2confluence)
 [![dev dependencies](https://img.shields.io/david/dev/Rayzr522/markdown2confluence.svg)](https://david-dm.org/Rayzr522/markdown2confluence#info=devDependencies)
 
