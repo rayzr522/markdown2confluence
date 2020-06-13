@@ -1,4 +1,4 @@
-<h1 align="center">Markdown2Confluence</h1>
+<h1 align="center">:tada: Markdown2Confluence :tada:</h1>
 <p align="center">
     <a href="https://npmjs.org/package/@rayzr/minecraft2confluence">
         <img alt="npm version" src="https://img.shields.io/npm/v/@rayzr/markdown2confluence.svg"/>
