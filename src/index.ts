@@ -22,8 +22,8 @@ export interface RenderOptions {
 }
 
 export interface TableFlags {
-    header: boolean;
-    align: 'center' | 'left' | 'right' | null;
+    header: boolean
+    align: 'center' | 'left' | 'right' | null
 }
 
 /**
