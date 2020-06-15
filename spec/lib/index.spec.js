@@ -102,9 +102,13 @@ cow()
         it('leaves unsafe HTML entities intact', () => {
             expect(convert('`~/file` and `~/folder` and `{braces}`')).toEqual('{{~/file}} and {{~/folder}} and {{\\{braces\\}}}')
         })
+        it('preserves entities that are not already HTML encoded', () => {
+            expect(convert('`Fish&Chips`')).toEqual('{{Fish&Chips}}')
+            expect(convert('`> and <`')).toEqual('{{> and <}}')
+        })
         it('preserves entities that are already HTML encoded', () => {
-            expect(convert('`Fish&Chips`')).toEqual('{{Fish&amp;Chips}}')
-            expect(convert('`> and <`')).toEqual('{{&gt; and &lt;}}')
+            expect(convert('`Fish&amp;Chips`')).toEqual('{{Fish&amp;Chips}}')
+            expect(convert('`&gt; and &lt;`')).toEqual('{{&gt; and &lt;}}')
         })
         it('prevents pre-emptive closing braces', () => {
             expect(convert('`code}} breaks {{here`')).toEqual('{{code\\}\\} breaks \\{\\{here}}')
