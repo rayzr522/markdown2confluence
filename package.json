@@ -25,6 +25,7 @@
     "files": [
         "lib"
     ],
+    "bin": "./bin/markdown2confluence.js",
     "scripts": {
         "test": "script/test",
         "watch": "script/watch"
