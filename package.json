@@ -44,6 +44,6 @@
     "dependencies": {
         "@types/marked": "^0.7.4",
         "ent": "^2.2.0",
-        "marked": "^1.1.0"
+        "marked": "^4.0.10"
     }
 }
